@@ -1,49 +1,28 @@
-/*
+//character
+let gameChar = {
+	gameChar_x: 512,
+	gameChar_y: 280,
+	gameChar_head: 40
+};
 
-The Game Project
-
-1 - Background Scenery
-
-Use p5 drawing functions such as rect, ellipse, line, triangle and
-point to draw the scenery as set out in the code comments. The items
-should appear next to the text titles.
-
-Each bit of scenery is worth two marks:
-
-0 marks = not a reasonable attempt
-1 mark = attempted but it's messy or lacks detail
-2 marks = you've used several shape functions to create the scenery
-
-I've given titles and chosen some base colours, but feel free to
-imaginatively modify these and interpret the scenery titles loosely to
-match your game theme.
-
-
-WARNING: Do not get too carried away. If you're shape takes more than 5 lines
-of code to draw then you've probably over done it.
-
-
-*/
 
 function setup()
 {
 	createCanvas(1024, 576);
+	Previous_key = '';
 }
+
 
 function draw()
 {
 	background(64, 82, 98); //fill the sky blue
-
-
-
-	//1. a cloud in the sky
 	
-	
+		//1. a cloud in the sky
 	stroke(103, 106, 119); //moon
 	strokeWeight(300);
 	point(150, 100);
 	
-	stroke(59, 60, 67); //clouds
+	stroke(59, 60, 67); //cloud 1
 	strokeWeight(300);
 	point(50, 300);
 	strokeWeight(250);
@@ -55,8 +34,7 @@ function draw()
 	strokeWeight(100);
 	point(420, 410);
 	
-	
-	strokeWeight(100);
+	strokeWeight(100); //cloud 2
 	point(480, 100);
 	strokeWeight(150);
 	point(550, 100);
@@ -68,16 +46,14 @@ function draw()
 	point(850, 100);
 	strokeWeight(200);
 	point(950, 100);
-
-
 	
+		//draw some green ground
 	noStroke();
 	fill(37, 52, 45);
-	rect(0, 422, 1024, 154); //draw some green ground
+	rect(0, 422, 1024, 154); 
 
 
-	//2. a mountain in the distance
-	
+		//2. a mountain in the distance
 	noStroke(); //church
 	fill(30, 31, 36);
 	rect(400, 330, 300, 92);
@@ -87,27 +63,21 @@ function draw()
 	triangle(660, 270, 710, 270, 685, 240);
 	triangle(460, 400, 640, 400, 550, 100);
 
-
-	//3. a tree
-
+		//3. a tree
 	fill(24, 22, 21);
 	triangle(830, 423, 870, 423, 850, 100);
 	triangle(840, 400, 820, 310, 840, 370);
 	triangle(850, 280, 870, 200, 850, 260);
 	
-	//4. a canyon 
-	//NB. the canyon should go from ground-level to the bottom of the screen
-
-	
+		//4. a canyon 
+		//NB. the canyon should go from ground-level to the bottom of the screen
 	fill(27, 32, 28);
 	rect(100, 422, 150, 154);
 	fill(0, 0, 0, 100);
 	rect(110, 422, 130, 140);
 	
-
-	//5. a collectable token - eg. a jewel, fruit, coins
-	//lantern
-
+		//5. a collectable token - eg. a jewel, fruit, coins
+		//lantern
 	stroke(0, 0, 0);
 	strokeWeight(7);
 	fill(212, 166, 55);
@@ -116,5 +86,124 @@ function draw()
 	triangle(398, 400, 427, 400, 412, 380);
 	strokeWeight(10);
 	point(412, 375);
+	console.log(key);
 	
+	if (key == 'A')
+	{
+			//Character - LEFT
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x - 10, gameChar.gameChar_y); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100); // dress
+		fill(169, 169, 169);
+		rect(gameChar.gameChar_x - 2, gameChar.gameChar_y + 100, 5, 42); //right leg
+		fill(255, 250, 250);
+		rect(gameChar.gameChar_x + 2, gameChar.gameChar_y + 100, 5, 42); //left leg;
+		
+		Previous_key = 'A';
+	}
+	else if (Previous_key == 'A' && key == ' ')
+	{
+	   		//Character - LEFT JUMP
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y - 50); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x - 10, gameChar.gameChar_y - 50); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15 - 50, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100  - 50, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100  - 50); // dress
+		fill(169, 169, 169);
+		rect(gameChar.gameChar_x + 2, gameChar.gameChar_y + 100  - 50, 5, 21); //right leg
+		rect(gameChar.gameChar_x + 2, gameChar.gameChar_y + 100  - 50 + 21, 21, 5);
+		fill(255, 250, 250);
+		rect(gameChar.gameChar_x - 2, gameChar.gameChar_y + 100  - 50, 5, 21); //left leg
+		rect(gameChar.gameChar_x - 2, gameChar.gameChar_y + 100  - 50 + 21, 21, 5); //left leg
+	}
+	else if (key == 'D')
+	{
+		   //Character - RIGHT
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x + 10, gameChar.gameChar_y); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100); // dress
+		fill(169, 169, 169);
+		rect(gameChar.gameChar_x + 2, gameChar.gameChar_y + 100, 5, 42); //right leg
+		fill(255, 250, 250);
+		rect(gameChar.gameChar_x - 2, gameChar.gameChar_y + 100, 5, 42); //left leg
+		
+		Previous_key = 'D'; 
+	}
+	else if (Previous_key == 'D' && key == ' ')
+	{
+			//Character - RIGHT JUMP
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y - 50); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x + 10, gameChar.gameChar_y - 50); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15 - 50, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100 - 50, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100 - 50); // dress
+		fill(169, 169, 169);
+		rect(gameChar.gameChar_x - 2, gameChar.gameChar_y + 100 - 50, 5, 21); //right leg
+		rect(gameChar.gameChar_x - 2 - 16, gameChar.gameChar_y + 100 - 50 + 21, 21, 5); //right leg
+		fill(255, 250, 250);
+		rect(gameChar.gameChar_x + 2, gameChar.gameChar_y + 100 - 50, 5, 21); //left leg
+		rect(gameChar.gameChar_x + 2 - 16, gameChar.gameChar_y + 100 - 50 + 21, 21, 5); //left leg
+	}
+	else if (Previous_key == '' && key == ' ')
+	{
+			//Character - FRONT JUMP
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y - 50); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x + 10, gameChar.gameChar_y - 50); //right eye
+		point(gameChar.gameChar_x - 10, gameChar.gameChar_y - 50); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15 - 50, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100  - 50, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100  - 50); // dress
+		fill(169, 169, 169);
+		rect(gameChar.gameChar_x - 10, gameChar.gameChar_y + 100 - 50 + 21, 5, 7); //shadow left leg
+		rect(gameChar.gameChar_x + 5, gameChar.gameChar_y + 100 - 50 + 21, 5, 7); //shadow right leg
+		fill(255, 250, 250);
+		rect(gameChar.gameChar_x - 10, gameChar.gameChar_y + 100 - 50, 5, 21); //left leg
+		rect(gameChar.gameChar_x + 5, gameChar.gameChar_y + 100 - 50, 5, 21); //right leg
+	}
+	else
+	{
+		//Character - FRONT
+		stroke(255, 250, 250);
+		strokeWeight(gameChar.gameChar_head);
+		point(gameChar.gameChar_x, gameChar.gameChar_y); //head
+		stroke(0, 0, 0);
+		strokeWeight(10);
+		point(gameChar.gameChar_x + 10, gameChar.gameChar_y); //right eye
+		point(gameChar.gameChar_x - 10, gameChar.gameChar_y); //left eye
+		noStroke();
+		fill(255, 250, 250);
+		triangle(gameChar.gameChar_x, gameChar.gameChar_y + 15, gameChar.gameChar_x - 30, gameChar.gameChar_y + 100, gameChar.gameChar_x + 30, gameChar.gameChar_y + 100); // dress
+		rect(gameChar.gameChar_x - 10, gameChar.gameChar_y + 100, 5, 42); //left leg
+		rect(gameChar.gameChar_x + 5, gameChar.gameChar_y + 100, 5, 42); //right leg
+		
+		Previous_key = '';
+	
+	}
+	
+
 }
+
